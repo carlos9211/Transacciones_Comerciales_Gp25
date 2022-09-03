@@ -1,0 +1,2 @@
+# Transacciones_Comerciales_Gp25
+ Proyecto_misionTIC22_G25
