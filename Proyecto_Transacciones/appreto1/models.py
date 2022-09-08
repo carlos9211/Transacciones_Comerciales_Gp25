@@ -49,7 +49,8 @@ class Ingresos(models.Model):
     IdIngreso=models.IntegerField(primary_key=True,max_length=20)
     Valor=models.CharField(max_length=100)
     Concepto=models.CharField(max_length=300)
-    Fecha=models.DateTimeField(default=datetime.now)
+    FechaCreacion=models.DateTimeField(default=datetime.now)
+    FechaModificacion=models.DateTimeField(default=datetime.now)    
     IdEmpresa=models.ForeignKey(Empresas,on_delete=models.CASCADE)
     IdEmpleado=models.ForeignKey(Empleados,on_delete=models.CASCADE)
 
@@ -58,6 +59,7 @@ class Egresos(models.Model):
     IdEgreso=models.IntegerField(primary_key=True,max_length=20)
     Valor=models.CharField(max_length=100)
     Concepto=models.CharField(max_length=300)
-    Fecha=models.DateTimeField(default=datetime.now)
+    FechaCreacion=models.DateTimeField(default=datetime.now)
+    FechaModificacion=models.DateTimeField(default=datetime.now)
     IdEmpresa=models.ForeignKey(Empresas,on_delete=models.CASCADE)
     IdEmpleado=models.ForeignKey(Empleados,on_delete=models.CASCADE)
