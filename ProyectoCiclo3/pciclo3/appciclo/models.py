@@ -14,8 +14,9 @@ class Empresa(models.Model):
     SectorProductivo=models.CharField(max_length=50)
     FechaCreacion=models.DateTimeField(default=datetime.now)
     FechaModificacion=models.DateTimeField(default=datetime.now)
+
     def __str__(self):
-        return self.IdEmpresa,self.Nombre,self.Nit,self.Ciudad,self.Direccion,self.Telefono,self.SectorProductivo,self.FechaCreacion,self.FechaModificacion
+        return '{} {} {} {} {} {} {} {} {}'.format(self.IdEmpresa,self.Nombre,self.Nit,self.Ciudad,self.Direccion,self.Telefono,self.SectorProductivo,self.FechaCreacion,self.FechaModificacion)
 
 #TABLA DE ROLES
 class Rol(models.Model):
@@ -24,7 +25,7 @@ class Rol(models.Model):
     FechaCreacion=models.DateTimeField(default=datetime.now)
     FechaModificacion=models.DateTimeField(default=datetime.now)  
     def __str__(self):
-        return self.IdRol,self.Nombre,self.FechaCreacion,self.FechaModificacion
+        return '{} {} {} {}'.format(self.IdRol, self.Nombre, self.FechaCreacion, self.FechaModificacion)
 
 #TABLA DE CONTRASENAS
 class Contrasena(models.Model):
@@ -33,7 +34,7 @@ class Contrasena(models.Model):
     FechaCreacion=models.DateTimeField(default=datetime.now)
     FechaModificacion=models.DateTimeField(default=datetime.now)
     def __str__(self):
-        return self.IdContrasena,self.Contrasena,self.FechaCreacion,self.FechaModificacion
+        return '{} {} {} {}'.format(self.IdContrasena,self.Contrasena,self.FechaCreacion,self.FechaModificacion)
 #TABLA DE EMPLEADOS
 class Empleado(models.Model):
     IdEmpleado=models.IntegerField(primary_key=True, max_length=20,unique=True)
@@ -49,7 +50,7 @@ class Empleado(models.Model):
     IdContrasena=models.ForeignKey(Contrasena,on_delete=models.CASCADE)
     IdEmpresa=models.ForeignKey(Empresa,on_delete=models.CASCADE)
     def __str__(self):
-        return (self.IdEmpleado,self.Imagen,self.Nombre,self.Apellidos,self.Email,self.Telefono,self.Cargo,self.FechaCreacion,self.FechaModificacion,self.IdRol,self.IdContrasena,self.IdEmpresa)
+        return  '{} {} {} {} {} {} {} {} {} {} {} {}'.format(self.IdEmpleado,self.Imagen,self.Nombre,self.Apellidos,self.Email,self.Telefono,self.Cargo,self.FechaCreacion,self.FechaModificacion,self.IdRol,self.IdContrasena,self.IdEmpresa)
 
 #TABLA DE INGRESOS
 class Ingreso(models.Model):
@@ -61,7 +62,7 @@ class Ingreso(models.Model):
     IdEmpresa=models.ForeignKey(Empresa,on_delete=models.CASCADE)
     IdEmpleado=models.ForeignKey(Empleado,on_delete=models.CASCADE)
     def __str__(self):
-        return self.IdIngreso,self.Concepto,self.Monto,self.FechaCreacion,self.FechaModificacion,self.IdEmpresa,self.IdEmpleado
+        return '{} {} {} {} {} {} {}'.format(self.IdIngreso,self.Concepto,self.Monto,self.FechaCreacion,self.FechaModificacion,self.IdEmpresa,self.IdEmpleado)
 
 #TABLA DE EGRESOS
 class Egreso(models.Model):
@@ -73,4 +74,4 @@ class Egreso(models.Model):
     IdEmpresa=models.ForeignKey(Empresa,on_delete=models.CASCADE)
     IdEmpleado=models.ForeignKey(Empleado,on_delete=models.CASCADE)
     def __str__(self):
-        return self.IdEgreso,self.Concepto,self.Monto,self.FechaCreacion,self.FechaModificacion,self.IdEmpresa,self.IdEmpleado
+        return '{} {} {} {} {} {} {}'.format(self.IdEgreso,self.Concepto,self.Monto,self.FechaCreacion,self.FechaModificacion,self.IdEmpresa,self.IdEmpleado)
