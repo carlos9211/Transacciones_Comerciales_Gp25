@@ -15,7 +15,6 @@ class EmpresaView(View):
         return JsonResponse (datos)
 
 #post enviamos los datos a la tabla por medio del body
-
     def post(self,request):
         datos=json.loads(request.body)
         Empresa.objects.create(IdEmpresa=datos["IdEmpresa"],Nombre=datos["Nombre"],Nit=datos["Nit"],Ciudad=datos["Ciudad"],Direccion=datos["Direccion"],Telefono=datos["Telefono"],SectorProductivo=datos["SectorProductivo"])
@@ -38,5 +37,13 @@ class EmpresaView(View):
         else:
             mensaje={"Respuesta":"Datos No Encontrados"}
         return JsonResponse(mensaje)
-        
+
+    def delete(self,request,doc):
+        cli=list(Empresa.objects.filter(IdEmpresa=doc).values())
+        if len(cli)>0:
+            Empresa.objects.filter(IdEmpresa=doc).delete()
+            mensaje={"Respuesta": "El Registro se Elimino"}
+        else:
+            mensaje={"Respuesta":"El  Registro no se Encontro"}
+        return JsonResponse (mensaje)
 # Create your views here.
