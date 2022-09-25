@@ -3,7 +3,13 @@ import json
 from pydoc import cli
 from django.shortcuts import render
 from django.views import View
-from .models import Empleado, Empresa, Rol
+from .models import Contrasena, Empleado, Empresa, Rol, Ingreso, Egreso
+from .models import Empleado
+from .models import Empresa
+from .models import Rol
+from .models import Ingreso
+from .models import Egreso
+
 from django.http.response import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -109,9 +115,12 @@ class EmpleadoView(View):
         return JsonResponse (datos)
 
     def post(self,request):
-        dato=json.loads(request.body)
-        Empleado.objects.create(IdEmpleado=dato["IdEmpleado"],Nombre=dato["Nombre"],Apellidos=dato["Apellidos"],Email=dato["Email"],Telefono=dato["Telefono"],Cargo=dato["Cargo"],FechaCreacion=dato["FechaCreacion"],FechaModificacion=dato["FechaModificacion"])
-        return JsonResponse(dato)
+        datos=json.loads(request.body)
+        empr=Empresa.objects.get(IdEmpresa=datos["IdEmpresa"])
+        rol=Rol.objects.get(IdRol=datos["IdRol"])
+        pas=Contrasena.objects.get(IdContrasena=datos["IdContrasena"])
+        Empleado.objects.create(IdEmpleado=datos["IdEmpleado"],Nombre=datos["Nombre"],Apellidos=datos["Apellidos"],Email=datos["Email"],Telefono=datos["Telefono"],Cargo=datos["Cargo"],FechaCreacion=datos["FechaCreacion"],FechaModificacion=datos["FechaModificacion"],IdEmpresa=empr, IdRol=rol, IdContrasena=pas)
+        return JsonResponse(datos)
 
 
 #class EmpresaView(View):
