@@ -236,3 +236,5 @@ class EgresoView(View):
         except Contrasena.DoesNotExist:
          aviso={"mensaje":"La linea no existe"}
         return JsonResponse(aviso)
+
+#
