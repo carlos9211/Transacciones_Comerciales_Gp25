@@ -43,7 +43,7 @@ class EmpresaView(View):
         Empresa.objects.create(IdEmpresa=datos["IdEmpresa"],Nombre=datos["Nombre"],Nit=datos["Nit"],Ciudad=datos["Ciudad"],Direccion=datos["Direccion"],Telefono=datos["Telefono"],SectorProductivo=datos["SectorProductivo"])
         return JsonResponse(datos)
 
-#put se usa para modificar los datos
+#put se usa para modificar los datos se envian por medio del body
     def put(self,request,doc):
         datos=json.loads(request.body)
         emp=list(Empresa.objects.filter(IdEmpresa=doc).values())
@@ -62,7 +62,7 @@ class EmpresaView(View):
         return JsonResponse(mensaje)
 
 
-#eliminamos datos de la tabla
+#eliminamos datos de la tabla, se envia por la url el id de los datos que deseamos eliminar
     def delete(self,request,doc):
         empr=list(Empresa.objects.filter(IdEmpresa=doc).values())
         if len(empr)>0:
@@ -92,6 +92,7 @@ class RolView(View):
             empr=list(Empresa.objects.values())
             info={'listadoempresa':empr}
         return JsonResponse (info)
+
 #se crea un metodo con la tabla de empleados para los crud
 class EmpleadoView(View):
     #se usa un metodo que evita el conflicto con los metodos de seguridad de django
@@ -99,7 +100,7 @@ class EmpleadoView(View):
     def dispatch(self,request,*args,**kwargs):
         return super().dispatch(request,*args,**kwargs)
 
-#se crea por metodoo get las opciones de hacer consultas general o por empleado
+#se crea por metodo get las opciones de hacer consultas general o por empleado enviando el id a consultar por la url
     def get(self,request,Id=0):
         if Id>0:
             empl=list(Empleado.objects.values())
@@ -114,7 +115,7 @@ class EmpleadoView(View):
             datos={'listadoempleado':empl}
         return JsonResponse (datos)
 
-#Se crean nuevos usuarios 
+#Se crean nuevos usuarios, se envian los datos por el body
     def post(self,request):
         datos=json.loads(request.body)
         empr=Empresa.objects.get(IdEmpresa=datos["IdEmpresa"])
@@ -123,7 +124,7 @@ class EmpleadoView(View):
         Empleado.objects.create(IdEmpleado=datos["IdEmpleado"],Nombre=datos["Nombre"],Apellidos=datos["Apellidos"],Email=datos["Email"],Telefono=datos["Telefono"],Cargo=datos["Cargo"],FechaCreacion=datos["FechaCreacion"],FechaModificacion=datos["FechaModificacion"],IdEmpresa=empr, IdRol=rol, IdContrasena=pas)
         return JsonResponse(datos)
 
-#
+#Se modifican los datos de los empelados enviando por la url el id al que vamos a modificar
     def put(self,request,doc):
         datos=json.loads(request.body)
         try:
@@ -142,6 +143,90 @@ class EmpleadoView(View):
                  mensaje={"Respuesta":"Datos Actualizado"}
             else:
                 mensaje={"Respuesta":"Datos No Encontrados"}
+            return JsonResponse(mensaje)
+
+        except Empresa.DoesNotExist:
+         aviso={"mensaje":"La linea no existe"}
+        except Rol.DoesNotExist:
+         aviso={"mensaje":"La linea no existe"}
+        except Contrasena.DoesNotExist:
+         aviso={"mensaje":"La linea no existe"}
+        return JsonResponse(aviso)
+
+#Se crea el metodo para registrar ingresos y modificarlos en caso de ser necesario
+class IngresoView(View):
+#se usa un metodo que evita el conflicto con los metodos de seguridad de django
+    @method_decorator(csrf_exempt)
+    def dispatch(self,request,*args,**kwargs):
+        return super().dispatch(request,*args,**kwargs)
+
+#Se crean nuevos ingresos, estos se envian por el body
+    def post(self,request):
+        datos=json.loads(request.body)
+        empr=Empresa.objects.get(IdEmpresa=datos["IdEmpresa"])
+        empl=Empleado.objects.get(IdRol=datos["IdEmpleado"])
+        Ingreso.objects.create(IdIngreso=datos["IdIngreso"],Concepto=datos["Concepto"],Monto=datos["Monto"],FechaCreacion=datos["FechaCreacion"],FechaModificacion=datos["FechaModificacion"],IdEmpresa=empr, IdEmpleado=empl)
+        return JsonResponse(datos)  
+
+#Se modifican los Ingresos, enviando por la url el id al que vamos a modificar
+    def put(self,request,doc):
+        datos=json.loads(request.body)
+        try:
+            Ing=list(Ingreso.objects.filter(IdIngreso=doc).values())
+            if len(Ing)>0:
+                 Ingresos=Ingreso.objects.get(IdIngreso=doc)
+                 Ingresos.Concepto=datos["Concepto"]
+                 Ingresos.Monto=datos["Monto"]
+                 Ingresos.FechaCreacion=datos["FechaCreacion"]
+                 Ingresos.FechaModificacion=datos["FechaModificacion"]
+                 Empresas=Empresa.objects.get(IdEmpresa=datos["IdEmpresa"])
+                 Empleados=Empleado.objects.get(IdRol=datos["IdEmpleado"])
+                 Ingresos.save()
+                 mensaje={"Respuesta":"Ingreso Actualizado"}
+            else:
+                mensaje={"Respuesta":"Ingreso No Encontrados"}
+            return JsonResponse(mensaje)
+
+        except Empresa.DoesNotExist:
+         aviso={"mensaje":"La linea no existe"}
+        except Rol.DoesNotExist:
+         aviso={"mensaje":"La linea no existe"}
+        except Contrasena.DoesNotExist:
+         aviso={"mensaje":"La linea no existe"}
+        return JsonResponse(aviso)
+
+#Se crea el metodo para registrar Egresos y modificarlos en caso de ser necesario
+class EgresoView(View):
+#se usa un metodo que evita el conflicto con los metodos de seguridad de django
+    @method_decorator(csrf_exempt)
+    def dispatch(self,request,*args,**kwargs):
+        return super().dispatch(request,*args,**kwargs)
+
+#Se crean nuevos ingresos, estos se envian por el body
+    def post(self,request):
+        datos=json.loads(request.body)
+        empr=Empresa.objects.get(IdEmpresa=datos["IdEmpresa"])
+        empl=Empleado.objects.get(IdRol=datos["IdEmpleado"])
+        Egreso.objects.create(IdEgreso=datos["IdEgreso"],Concepto=datos["Concepto"],Monto=datos["Monto"],FechaCreacion=datos["FechaCreacion"],FechaModificacion=datos["FechaModificacion"],IdEmpresa=empr, IdEmpleado=empl)
+        return JsonResponse(datos)  
+
+#Se modifican los Ingresos, enviando por la url el id al que vamos a modificar
+    def put(self,request,doc):
+        datos=json.loads(request.body)
+        try:
+            Egr=list(Egreso.objects.filter(IdEgreso=doc).values())
+            if len(Egr)>0:
+                 Egresos=Egreso.objects.get(IdEgreso=doc)
+                 Egresos.Concepto=datos["Concepto"]
+                 Egresos.Monto=datos["Monto"]
+                 Egresos.FechaCreacion=datos["FechaCreacion"]
+                 Egresos.FechaModificacion=datos["FechaModificacion"]
+                 Empresas=Empresa.objects.get(IdEmpresa=datos["IdEmpresa"])
+                 Empleados=Empleado.objects.get(IdRol=datos["IdEmpleado"])
+                 Egresos.save()
+                 mensaje={"Respuesta":"Egreso Actualizado"}
+            else:
+                mensaje={"Respuesta":"Egreso No Encontrados"}
             return JsonResponse(mensaje)
 
         except Empresa.DoesNotExist:
