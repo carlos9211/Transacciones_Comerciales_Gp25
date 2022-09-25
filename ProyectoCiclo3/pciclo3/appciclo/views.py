@@ -46,8 +46,8 @@ class EmpresaView(View):
 #put se usa para modificar los datos
     def put(self,request,doc):
         datos=json.loads(request.body)
-        empr=list(Empresa.objects.filter(IdEmpresa=doc).values())
-        if len(empr)>0:
+        emp=list(Empresa.objects.filter(IdEmpresa=doc).values())
+        if len(emp)>0:
             Empresas=Empresa.objects.get(IdEmpresa=doc)
             Empresas.Nombre=datos["Nombre"]
             Empresas.Nit=datos["Nit"]
@@ -114,6 +114,7 @@ class EmpleadoView(View):
             datos={'listadoempleado':empl}
         return JsonResponse (datos)
 
+#Se crean nuevos usuarios 
     def post(self,request):
         datos=json.loads(request.body)
         empr=Empresa.objects.get(IdEmpresa=datos["IdEmpresa"])
@@ -122,5 +123,31 @@ class EmpleadoView(View):
         Empleado.objects.create(IdEmpleado=datos["IdEmpleado"],Nombre=datos["Nombre"],Apellidos=datos["Apellidos"],Email=datos["Email"],Telefono=datos["Telefono"],Cargo=datos["Cargo"],FechaCreacion=datos["FechaCreacion"],FechaModificacion=datos["FechaModificacion"],IdEmpresa=empr, IdRol=rol, IdContrasena=pas)
         return JsonResponse(datos)
 
+#
+    def put(self,request,doc):
+        datos=json.loads(request.body)
+        try:
+            empl=list(Empleado.objects.filter(IdEmpresa=doc).values())
+            if len(empl)>0:
+                 Empleados=Empleado.objects.get(IdEmpresa=doc)
+                 Empleados.Nombre=datos["Nombre"]
+                 Empleados.Apellidos=datos["Apellidos"]
+                 Empleados.Email=datos["Email"]
+                 Empleados.Telefono=datos["Telefono"]
+                 Empleados.Cargo=datos["Cargo"]
+                 Empresas=Empresa.objects.get(IdEmpresa=datos["IdEmpresa"])
+                 rols=Rol.objects.get(IdRol=datos["IdRol"])
+                 Contrasenas=Contrasena.objects.get(IdContrasena=datos["IdContrasena"])
+                 Empleados.save()
+                 mensaje={"Respuesta":"Datos Actualizado"}
+            else:
+                mensaje={"Respuesta":"Datos No Encontrados"}
+            return JsonResponse(mensaje)
 
-#class EmpresaView(View):
+        except Empresa.DoesNotExist:
+         aviso={"mensaje":"La linea no existe"}
+        except Rol.DoesNotExist:
+         aviso={"mensaje":"La linea no existe"}
+        except Contrasena.DoesNotExist:
+         aviso={"mensaje":"La linea no existe"}
+        return JsonResponse(aviso)
