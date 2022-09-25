@@ -7,7 +7,7 @@ from django.db import models
 class Empresa(models.Model):
     IdEmpresa=models.IntegerField(primary_key=True,max_length=20)
     Nombre=models.CharField(max_length=200)
-    Nit=models.CharField(max_length=10) 
+    Nit=models.CharField(max_length=10,unique=True) 
     Ciudad=models.CharField(max_length=50)
     Direccion=models.CharField(max_length=100)
     Telefono=models.CharField(max_length=20)
@@ -38,7 +38,7 @@ class Contrasena(models.Model):
 #TABLA DE EMPLEADOS
 class Empleado(models.Model):
     IdEmpleado=models.IntegerField(primary_key=True, max_length=20,unique=True)
-    Imagen=models.ImageField()
+    #Imagen=models.ImageField()
     Nombre=models.CharField(max_length=100)
     Apellidos=models.CharField(max_length=100)
     Email=models.EmailField(max_length=100,unique=True)
@@ -50,7 +50,7 @@ class Empleado(models.Model):
     IdContrasena=models.ForeignKey(Contrasena,on_delete=models.CASCADE)
     IdEmpresa=models.ForeignKey(Empresa,on_delete=models.CASCADE)
     def __str__(self):
-        return  '{} {} {} {} {} {} {} {} {} {} {} {}'.format(self.IdEmpleado,self.Imagen,self.Nombre,self.Apellidos,self.Email,self.Telefono,self.Cargo,self.FechaCreacion,self.FechaModificacion,self.IdRol,self.IdContrasena,self.IdEmpresa)
+        return  '{} {} {} {} {} {} {} {} {} {} {}'.format(self.IdEmpleado,self.Nombre,self.Apellidos,self.Email,self.Telefono,self.Cargo,self.FechaCreacion,self.FechaModificacion,self.IdRol,self.IdContrasena,self.IdEmpresa)
 
 #TABLA DE INGRESOS
 class Ingreso(models.Model):
