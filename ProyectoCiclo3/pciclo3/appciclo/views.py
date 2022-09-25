@@ -56,7 +56,7 @@ class EmpresaView(View):
             Empresas.Telefono=datos["Telefono"]
             Empresas.SectorProductivo=datos["SectorProductivo"]
             Empresas.save()
-            mensaje={"Respuesta":"Datos Actualizado"}
+            mensaje={"Respuesta":"Datos Actualizados"}
         else:
             mensaje={"Respuesta":"Datos No Encontrados"}
         return JsonResponse(mensaje)
@@ -127,9 +127,9 @@ class EmpleadoView(View):
     def put(self,request,doc):
         datos=json.loads(request.body)
         try:
-            empl=list(Empleado.objects.filter(IdEmpresa=doc).values())
+            empl=list(Empleado.objects.filter(IdEmpleado=doc).values())
             if len(empl)>0:
-                 Empleados=Empleado.objects.get(IdEmpresa=doc)
+                 Empleados=Empleado.objects.get(IdEmpleado=doc)
                  Empleados.Nombre=datos["Nombre"]
                  Empleados.Apellidos=datos["Apellidos"]
                  Empleados.Email=datos["Email"]
