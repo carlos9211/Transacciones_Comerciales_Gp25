@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {%load static%}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-sacale=1.0">
+        <title>Document</title>
+        {%if request.session.Email%}
+        <span>{{request.session.Email}}</span>
+    </head>
+    <body>
+       <h1>Bienvenido Contadorcd</h1>
+       <a href="">consultar cliente</a>
+    </body>
+    {%endif%}
+     
+</html>
