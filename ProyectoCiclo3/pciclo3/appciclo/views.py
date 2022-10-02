@@ -12,6 +12,8 @@ from email import message
 from django.contrib import messages
 from django.http.response import JsonResponse
 from django.utils.decorators import method_decorator
+from django.shortcuts import redirect
+from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
@@ -160,7 +162,8 @@ def loginusuario(request):
             if detalleusuario.IdRol=="Administrador":
                request.session['Email']=detalleusuario.Email
                request.session['documento']=detalleusuario.IdEmpleado
-               return render(request, 'usuario.html')
+               return redirect(reverse('usuario'))
+            #    return render(request, 'usuario.html')
             elif detalleusuario.IdRol=="Contador":
                request.session['Email']=detalleusuario.Email
                return render(request, 'contador.html')
@@ -170,6 +173,10 @@ def loginusuario(request):
          except Empleado.DoesNotExist as e:
             message.success(request,"No existe")
       return render(request,"ingreso.html")
+
+def usuario(request):
+
+    return render(request,"usuario.html")
 
 #Se crea el metodo para registrar ingresos y modificarlos en caso de ser necesario
 class IngresoView(View):

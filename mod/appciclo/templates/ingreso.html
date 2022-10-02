@@ -33,7 +33,8 @@
             </div>
             <h2 class="fw-bold text-center pt-5 py-5">WebApp Consulta</h2>
 
-            <form action="login">
+            <form action="" method="POST" >
+                {%csrf_token%}
                 <div class="mb-4">
                     <label for="Email" class="form-label">Email</label>
                     <input type="email" class="form-control" name="Email" id="Email" placeholder="Escribe tu Email">
