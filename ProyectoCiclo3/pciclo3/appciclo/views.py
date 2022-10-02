@@ -3,16 +3,19 @@ import json
 from pydoc import cli
 from django.shortcuts import render
 from django.views import View
-from .models import Contrasena, Empleado, Empresa, Rol, Ingreso, Egreso
+from .models import Empleado, Empresa, Ingreso, Egreso
 from .models import Empleado
 from .models import Empresa
-from .models import Rol
 from .models import Ingreso
 from .models import Egreso
-
+from email import message
+from django.contrib import messages
 from django.http.response import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate
+
 
 
 #creamos una clase con la tabla de empresas que permite ingresar datos
@@ -28,6 +31,7 @@ class EmpresaView(View):
             empr=list(Empresa.objects.filter(IdEmpresa=doc).values())
             if len(empr)>0:
                 emprrespuesta=empr[0]
+                template_name="EmpresaBaseEmpleado.html"
                 datos={"empresa":emprrespuesta}
             else:
                 datos={"respuesta":"Dato no se encontro"}
@@ -119,9 +123,7 @@ class EmpleadoView(View):
     def post(self,request):
         datos=json.loads(request.body)
         empr=Empresa.objects.get(IdEmpresa=datos["IdEmpresa"])
-        rol=Rol.objects.get(IdRol=datos["IdRol"])
-        pas=Contrasena.objects.get(IdContrasena=datos["IdContrasena"])
-        Empleado.objects.create(IdEmpleado=datos["IdEmpleado"],Nombre=datos["Nombre"],Apellidos=datos["Apellidos"],Email=datos["Email"],Telefono=datos["Telefono"],Cargo=datos["Cargo"],FechaCreacion=datos["FechaCreacion"],FechaModificacion=datos["FechaModificacion"],IdEmpresa=empr, IdRol=rol, IdContrasena=pas)
+        Empleado.objects.create(IdEmpleado=datos["IdEmpleado"],Nombre=datos["Nombre"],Apellidos=datos["Apellidos"],Email=datos["Email"],Telefono=datos["Telefono"],Cargo=datos["Cargo"],FechaCreacion=datos["FechaCreacion"],FechaModificacion=datos["FechaModificacion"],IdEmpresa=empr, IdRol=datos["IdRol"], IdContrasena=datos["IdContrasena"])
         return JsonResponse(datos)
 
 #Se modifican los datos de los empelados enviando por la url el id al que vamos a modificar
@@ -137,8 +139,8 @@ class EmpleadoView(View):
                  Empleados.Telefono=datos["Telefono"]
                  Empleados.Cargo=datos["Cargo"]
                  Empresas=Empresa.objects.get(IdEmpresa=datos["IdEmpresa"])
-                 rols=Rol.objects.get(IdRol=datos["IdRol"])
-                 Contrasenas=Contrasena.objects.get(IdContrasena=datos["IdContrasena"])
+                 Empleados.IdRol=datos["IdRol"]
+                 Empleados.IdContrasena=datos["IdContrasena"]
                  Empleados.save()
                  mensaje={"Respuesta":"Datos Actualizado"}
             else:
@@ -147,11 +149,27 @@ class EmpleadoView(View):
 
         except Empresa.DoesNotExist:
          aviso={"mensaje":"La linea no existe"}
-        except Rol.DoesNotExist:
-         aviso={"mensaje":"La linea no existe"}
-        except Contrasena.DoesNotExist:
-         aviso={"mensaje":"La linea no existe"}
         return JsonResponse(aviso)
+
+
+      
+def loginusuario(request):
+      if request.method=='POST':
+         try:
+            detalleusuario=Empleado.objects.get(Email=request.POST['Email'], IdContrasena=request.POST['IdContrasena'])
+            if detalleusuario.IdRol=="Administrador":
+               request.session['Email']=detalleusuario.Email
+               request.session['documento']=detalleusuario.IdEmpleado
+               return render(request, 'usuario.html')
+            elif detalleusuario.IdRol=="Contador":
+               request.session['Email']=detalleusuario.Email
+               return render(request, 'contador.html')
+            elif detalleusuario.IdRol=="General":
+               request.session['Email']=detalleusuario.Email
+               return render(request, 'general.html')   
+         except Empleado.DoesNotExist as e:
+            message.success(request,"No existe")
+      return render(request,"ingreso.html")
 
 #Se crea el metodo para registrar ingresos y modificarlos en caso de ser necesario
 class IngresoView(View):
@@ -188,10 +206,6 @@ class IngresoView(View):
             return JsonResponse(mensaje)
 
         except Empresa.DoesNotExist:
-         aviso={"mensaje":"La linea no existe"}
-        except Rol.DoesNotExist:
-         aviso={"mensaje":"La linea no existe"}
-        except Contrasena.DoesNotExist:
          aviso={"mensaje":"La linea no existe"}
         return JsonResponse(aviso)
 
@@ -230,10 +244,6 @@ class EgresoView(View):
             return JsonResponse(mensaje)
 
         except Empresa.DoesNotExist:
-         aviso={"mensaje":"La linea no existe"}
-        except Rol.DoesNotExist:
-         aviso={"mensaje":"La linea no existe"}
-        except Contrasena.DoesNotExist:
          aviso={"mensaje":"La linea no existe"}
         return JsonResponse(aviso)
 
