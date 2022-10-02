@@ -13,7 +13,7 @@ urlpatterns=[
     path('ingreso/<int:doc>',IngresoView.as_view(),name='corregir'),
     path('egreso/',EgresoView.as_view(),name='registrar'),
     path('egreso/<int:doc>',EgresoView.as_view(),name='corregir'),
-    #path('login/',views.login,name='login')
+    path('login/',views.loginusuario ,name='login')
 
     
 

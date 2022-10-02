@@ -19,14 +19,7 @@ class Empresa(models.Model):
     def __str__(self):
         return '{} {} {} {} {} {} {} {} {}'.format(self.IdEmpresa,self.Nombre,self.Nit,self.Ciudad,self.Direccion,self.Telefono,self.SectorProductivo,self.FechaCreacion,self.FechaModificacion)
 
-#TABLA DE ROLES
-class Rol(models.Model):
-    IdRol=models.IntegerField(primary_key=True, max_length=20)
-    Nombre=models.CharField(max_length=100)
-    FechaCreacion=models.DateTimeField(default=datetime.now)
-    FechaModificacion=models.DateTimeField(default=datetime.now)  
-    def __str__(self):
-        return '{} {} {} {}'.format(self.IdRol, self.Nombre, self.FechaCreacion, self.FechaModificacion)
+
 
 #TABLA DE EMPLEADOS
 class Empleado(models.Model):
@@ -39,7 +32,8 @@ class Empleado(models.Model):
     Cargo=models.CharField(max_length=100)
     FechaCreacion=models.DateTimeField(default=datetime.now)
     FechaModificacion=models.DateTimeField(default=datetime.now)
-    IdRol=models.ForeignKey(Rol,on_delete=models.CASCADE)
+    #IdRol=models.ForeignKey(Rol,on_delete=models.CASCADE)
+    IdRol=models.CharField(max_length=100)
     IdContrasena=models.CharField(max_length=100)
     IdEmpresa=models.ForeignKey(Empresa,on_delete=models.CASCADE)
     def __str__(self):
