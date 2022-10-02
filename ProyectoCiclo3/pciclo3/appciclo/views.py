@@ -166,7 +166,7 @@ def loginusuario(request):
             #    return render(request, 'usuario.html')
             elif detalleusuario.IdRol=="Contador":
                request.session['Email']=detalleusuario.Email
-               return render(request, 'contador.html')
+               return render(request, 'movimientos.html')
             elif detalleusuario.IdRol=="General":
                request.session['Email']=detalleusuario.Email
                return render(request, 'general.html')   
@@ -177,6 +177,7 @@ def loginusuario(request):
 def usuario(request):
 
     return render(request,"usuario.html")
+
 
 #Se crea el metodo para registrar ingresos y modificarlos en caso de ser necesario
 class IngresoView(View):

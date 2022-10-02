@@ -14,7 +14,6 @@ urlpatterns=[
     path('egreso/',EgresoView.as_view(),name='registrar'),
     path('egreso/<int:doc>',EgresoView.as_view(),name='corregir'),
     path('usuario/',views.usuario,name='usuario'),
-    #path('usuario/usuarioInfo.html',views.usuario,name='usuario'),
     path('login/',views.loginusuario ,name='login')
 
 
