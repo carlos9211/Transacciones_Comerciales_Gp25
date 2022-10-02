@@ -150,24 +150,6 @@ class EmpleadoView(View):
         except Empresa.DoesNotExist:
          aviso={"mensaje":"La linea no existe"}
         return JsonResponse(aviso)
-    
-    #LOGIN
-    """  def login(request):
-        if request.method=='POST':
-            try:
-                detalleUsuario=Empleado.objects.get(Email=request.POST['Email'],IdContrasena=request.POST['IdContrasena'])
-                if detalleUsuario.IdRol=="Administrador":
-                    request.session['Email']=detalleUsuario.Email
-                    return render(request, 'admin.html')
-                elif detalleUsuario.IdRol=="Contable":
-                    request.session['Email']=detalleUsuario.Email
-                    return render(request, 'contador.html')
-                elif detalleUsuario.IdRol=="General":
-                    request.session['Email']=detalleUsuario.Email
-                    return render(request, 'general.html')
-            except Empleado.DoesNotExist:
-                return(message.success(request,"No existe"))
-        return render(request,'ingreso.html') """
 
 
       
@@ -175,17 +157,8 @@ def loginusuario(request):
       if request.method=='POST':
          try:
             detalleusuario=Empleado.objects.get(Email=request.POST['Email'], IdContrasena=request.POST['IdContrasena'])
-            #detalleusuario=Cliente.objects.get(documento=['documento'], correo=['correo'])
-         #   cli=list(Cliente.objects.get(documento=detalleusuario.documento))
-            empl=list(Empleado.objects.filter(documento=200).values())
-            print(detalleusuario.IdEmpleado)
-           
-            datos={"listadoempleados":empl}
-            print(datos)
-            aaaa=request.POST['Email']
-            print("datosssssssssssss", aaaa)
             if detalleusuario.IdRol=="Administrador":
-               print("wwww", request.session['Email'])
+               
                request.session['Email']=detalleusuario.Email
                request.session['documento']=detalleusuario.IdEmpleado
                return render(request, 'admin.html')
