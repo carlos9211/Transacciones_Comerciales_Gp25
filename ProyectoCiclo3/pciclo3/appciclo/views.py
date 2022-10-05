@@ -1,5 +1,6 @@
 from distutils.log import info
-from django.http import HttpResponse
+from multiprocessing import context
+from re import template
 from django.views import View
 from django.contrib import messages
 from django.http.response import JsonResponse
@@ -9,7 +10,6 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
-from django.template import loader
 from email import message
 from pydoc import cli
 from .models import Empleado, Empresa, Ingreso, Egreso
@@ -66,7 +66,6 @@ class EmpresaView(View):
             mensaje={"Respuesta":"Datos No Encontrados"}
         return JsonResponse(mensaje)
 
-
 #eliminamos datos de la tabla, se envia por la url el id de los datos que deseamos eliminar
     def delete(self,request,doc):
         empr=list(Empresa.objects.filter(IdEmpresa=doc).values())
@@ -107,18 +106,20 @@ class EmpleadoView(View):
 
 #se crea por metodo get las opciones de hacer consultas general o por empleado enviando el id a consultar por la url
     def get(self,request,Id=0):
-        if Id>0:
-            empl=list(Empleado.objects.values())
-            if len(empl)>0:
-                emplrespuesta=empl[0]
-                datos={"empleado":emplrespuesta}
+        if Id > 0:
+            listado = list(Empleado.objects.values())
+            if len(listado) > 0:
+                emplrespuesta = listado[0]
+                context = {"empleado":emplrespuesta}
             else:
-                datos={"respuesta":"Dato no se encontro"}
+                context = {"respuesta":"Dato no se encontro"}
         else:
-             #datos={"empleado":clirespuesta}
-            empl=list(Empleado.objects.values())
-            datos={'listadoempleado':empl}
-        return JsonResponse (datos)
+            #datos={"empleado":clirespuesta}
+            listado = list(Empleado.objects.values())
+            template = 'empleados.html'
+            context = {'listado_empleados': listado}
+        
+        return render(request, template, context)
 
 #Se crean nuevos usuarios, se envian los datos por el body
     def post(self,request):
