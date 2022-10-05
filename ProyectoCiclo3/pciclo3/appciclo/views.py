@@ -1,23 +1,20 @@
 from distutils.log import info
-import json
-from pydoc import cli
-from django.shortcuts import render
+from django.http import HttpResponse
 from django.views import View
-from .models import Empleado, Empresa, Ingreso, Egreso
-from .models import Empleado
-from .models import Empresa
-from .models import Ingreso
-from .models import Egreso
-from email import message
 from django.contrib import messages
 from django.http.response import JsonResponse
 from django.utils.decorators import method_decorator
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
+from django.template import loader
+from email import message
+from pydoc import cli
+from .models import Empleado, Empresa, Ingreso, Egreso
 
+import json
 
 
 #creamos una clase con la tabla de empresas que permite ingresar datos
@@ -29,19 +26,21 @@ class EmpresaView(View):
 
 #Se realizan las consualtas por medio de get, permite consulta general o por id enviada por la url
     def get(self,request,doc=0):
-        if doc>0:
-            empr=list(Empresa.objects.filter(IdEmpresa=doc).values())
-            if len(empr)>0:
-                emprrespuesta=empr[0]
-                template_name="EmpresaBaseEmpleado.html"
-                datos={"empresa":emprrespuesta}
+        if doc > 0:
+            listado = list(Empresa.objects.filter(IdEmpresa=doc).values())
+            if len(listado) > 0:
+                emprrespuesta = listado[0]
+                template = "EmpresaBaseEmpleado.html"
+                context = {"empresa": emprrespuesta}
             else:
-                datos={"respuesta":"Dato no se encontro"}
+                datos = {"respuesta":"Dato no se encontro"}
         else:
-             #datos={"empresa":clirespuesta}
-            empr=list(Empresa.objects.values())
-            datos={'listadoempresa':empr}
-        return JsonResponse (datos)
+            #datos={"empresa":clirespuesta}
+            listado = list(Empresa.objects.values())
+            template = 'empresas.html'
+            context = {'listado_empresas': listado}
+        
+        return render(request, template, context)
 
 #post enviamos los datos a la tabla por medio del body
     def post(self,request):
@@ -153,7 +152,6 @@ class EmpleadoView(View):
          aviso={"mensaje":"La linea no existe"}
         return JsonResponse(aviso)
 
-
       
 def loginusuario(request):
       if request.method=='POST':
@@ -175,7 +173,6 @@ def loginusuario(request):
       return render(request,"ingreso.html")
 
 def usuario(request):
-
     return render(request,"usuario.html")
 
 

@@ -102,38 +102,39 @@
                     <a href="empresasBaseEmpresa.html" class="btn btn-secondary btn-sm">Tabla Empresas</a>
                     <a href="empresaBaseEmpleados.html" class="btn btn-secondary btn-sm">Tabla Empleados</a>
 
-                    <table class="table">
-                        <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Id Empresa</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Nit</th>
-                            <th scope="col">Ciudad</th>
-                            <th scope="col">Dirección</th>
-                            <th scope="col">Teléfono</th>
-                            <th scope="col">Sector Productivo</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">01</th>
-                            <td>Prueba</td>
-                            <td>1012035698-1</td>
-                            <td>Bogotá</td>
-                            <td>Calle 170 # 80 - 20</td>
-                            <td>3105689874</td>
-                            <td>EdTech</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    {% if listado_empresas %}
+                        <table class="table">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Id Empresa</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Nit</th>
+                                <th scope="col">Ciudad</th>
+                                <th scope="col">Dirección</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Sector Productivo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for empresa in listado_empresas %}
+                                <tr>
+                                    <th scope="row">{{empresa.IdEmpresa}}</th>
+                                    <td>{{empresa.Nombre}}</td>
+                                    <td>{{empresa.Nit}}</td>
+                                    <td>{{empresa.Ciudad}}</td>
+                                    <td>{{empresa.Direccion}}</td>
+                                    <td>{{empresa.Telefono}}</td>
+                                    <td>{{empresa.SectorProductivo}}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>No existen empresas.</p>
+                    {% endif %}
                 </div>
-
             </section>
-
         </div>
-
-
-
     </div>
 </div>
 
