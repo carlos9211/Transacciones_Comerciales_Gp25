@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    /*text-shadow: 1px 2px 4px black; da un efecto de sombra a las letras*/
 }
 
 .titulo{
@@ -30,7 +31,7 @@
     width: 100%;
     Justify-content: space-evenly;
     padding: 25px;
-    
+    box-shadow: 1px 10px 5px 0;/*da efecto como de sombra*/
 
 }
 

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- {%load static%} -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-sacale=1.0">
+        <link rel="stylesheet" href="../css/reset.css">
+        <link rel="stylesheet" href="../css/styless.css">
+        <link rel="stylesheet" href="../css/stylessfromu.css">
+        
+        <title>Document</title>
+        <!-- {%if request.session.Email%}
+        <span>{{request.session.Email}}</span> -->
+    </head>
+
+<body class="cuerpo">
+    <header class="header1">
+        <div class="logo1"><h1 class="titulo1">REGISTR0 DE USUARIOS</h1></div>
+        <div><!-- se utiliza para hacer diciciones no se recomienda usar muchas veces en el codigo por buenas practicas -->
+            </h1><!-- se usa para los titulos va del 1 al 6 varia los tamaños -->
+        </div>
+        
+
+
+    </header>
+    <main>
+    
+            <!-- <div class="container-buttons"> 
+                <div class="usuarios-buttons"><a href="/formulario/">Crear Usuario</a> <a href= "nombre del archivo.html">Modificar Usuarios</a> <a href="/cliente/">Consultar Usuario</a></div>
+                <div class="empresas-botones"><a href="">Crear Empresa</a> <a href= "nombre del archivo.html">Modificar Empresa</a> <a href="">Consultar Empresa</a></div>
+            </div> -->
+    
+
+        <!-- <nav class="nav1">
+            <ul>
+                <li>  <a href="/formulario/">Crear Usuario</a></li>  se usan para poner referencias de links con su nombre a presentar se puede usar solo la a
+                <li><a href= "nombre del archivo.html">Modificar Usuarios</a></li>
+                <li><a href="/cliente/">Consultar Usuario</a></li>
+                
+             </ul>
+        </nav> -->
+
+
+        <!-- <nav class="nav2">
+            <ul>
+                <li><a href="">Crear Empresa</a></li>
+                <li><a href= "nombre del archivo.html">Modificar Empresa</a></li>
+                <li><a href="">Consultar Empresa</a></li>
+                
+            </ul>
+        </nav>
+        -->
+        <section class="formulario" id="formu1"><!--divide lo que contiene por sectores o secciones -->
+            <fieldset class="fieldset">
+                
+                <from action="" method="" class="form"><!-- se indica la url y el metodo que se usara post, get put, etc -->
+                    <legend>Ingrese los datos del usuario</legend> <!-- va el titulo del formulario o leyenda -->
+
+                    <p>En el siguiente formulario debe ingresar los datos de los clientes que pertenen a las empresas y que podran realizar transacciones segun el perfil asiganado en el programa</p>
+                    
+                    <label for="a">ID Empleado <input type="text" id="a"></label>
+                    
+                    <label for="b">Nombre      <input type="text" id="b"></label>
+                    
+                    <label for="c">Apellidos     <input type="text" id="c"></label>
+                    
+                    <label for="d">Correo    <input type="email" id="d"></label>
+                    
+                    <label for="e">Telefono   <input type="number"id="e"></label>
+                    
+                    <label for="f">Cargo   <input type="text" id="f"></label>
+
+                    <label for="fg">Fecha de Creacion   <input type="date" id="g"></label>
+
+                    <label for="fg">Fecha de Modificacion <input type="date" id="g"></label>
+
+                    <input type="submit" value=" Enviar"><!-- el submit permite crear un boton para enviar -->
+                   
+                    
+                </from>
+            </fieldset>
+            
+   
+        </section>
+        
+{%endif%}
+ 
+</body>
+</main>
+<footer><!-- se usa para los pies de paginas -->
+
+</footer>
+        
+</html>
