@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        {%load static%}
+        <!-- {%load static%} -->
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-sacale=1.0">
-        <title>Document</title>
+        <link rel="stylesheet" href="../css/reset.css">
+        <link rel="stylesheet" href="../css/styless.css">
+        <title>Contador</title>
         {%if request.session.Email%}
-        <span>{{request.session.Email}}</span>
+        <span>{{request.session.Email}}</span> 
     </head>
-    <body>
-       <h1>Bienvenido Contador</h1>
-       <a href="">consultar cliente</a>
-    </body>
-    {%endif%}
-     
+
+<body>
+    <header class="header">
+        <div><!-- se utiliza para hacer diciciones no se recomienda usar muchas veces en el codigo por buenas practicas -->
+            <h1 class="titulo">Bienvenido Contador</h1><!-- se usa para los titulos va del 1 al 6 varia los tamaños -->
+        </div>
+        <div class="logo"></div>
+
+
+    </header>
+    <main>
+    
+            <div class="container-buttons"> 
+                <div class="usuarios-buttons"><a href="/formulario/">Crear Ingreso</a> <a href= "nombre del archivo.html">Modificar Ingreso</a> <a href="/cliente/">Crear Egreso</a> <a href="">Modificar Egreso</a> </div>
+                <div class="empresas-botones"> <a href="">Modificar Datos Personales</a> </div>
+            </div>
+    </main>
+</body>
+
+<footer><!-- se usa para los pies de paginas -->
+
+</footer>
+        
 </html>

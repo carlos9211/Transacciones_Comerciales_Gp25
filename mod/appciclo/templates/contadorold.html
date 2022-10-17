@@ -6,15 +6,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-sacale=1.0">
         <title>Document</title>
+        {%if request.session.Email%}
+        <span>{{request.session.Email}}</span>
     </head>
     <body>
-        <form action="" method="post">
-            {%csrf_token%}
-            <input type="text" name="Email">
-            <input type="text" name="IdContrasena">
-            <input type="submit" value="Ingresar">
-        </form>
+       <h1>Bienvenido Contador</h1>
+       <a href="">consultar cliente</a>
     </body>
-        
+    {%endif%}
      
 </html>
