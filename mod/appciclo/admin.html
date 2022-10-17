@@ -15,29 +15,39 @@
 <body>
     <header class="header">
         <div><!-- se utiliza para hacer diciciones no se recomienda usar muchas veces en el codigo por buenas practicas -->
-            <h1>Bienvenido Administrador</h1><!-- se usa para los titulos va del 1 al 6 varia los tamaños -->
+            <h1 class="titulo">Bienvenido Administrador</h1><!-- se usa para los titulos va del 1 al 6 varia los tamaños -->
         </div>
-        <div class="logo">Logo</div>
-        <nav class="nav">
-            <ul>
-                <li>  <a href="/formulario/">Registrar Usuario</a></li><!-- se usan para poner referencias de links con su nombre a presentar se puede usar solo la a -->
-                <li><a href="/cliente/">Consultar Usuario</a></li>
-                <li><a href= "nombre del archivo.html">Modificar Usuarios</a></li>
-             </ul>
-        </nav>
+        <div class="logo"></div>
 
-
-        <nav class="nav">
-            <ul>
-                <li><a href="">Registrar Empresa</a></li>
-                <li><a href="">Consultar Empresa</a></li>
-                <li><a href= "nombre del archivo.html">Modificar Empresa</a></li>
-            </ul>
-        </nav>
 
     </header>
     <main>
-        <section><!-- divide lo que contiene por sectores o secciones -->
+    <ul>
+            <div class="container-buttons"> 
+                <div class="usuarios-buttons"><a href="/formulario/">Crear Usuario</a> <a href= "nombre del archivo.html">Modificar Usuarios</a> <a href="/cliente/">Consultar Usuario</a></div>
+                <div class="empresas-botones"><a href="">Crear Empresa</a> <a href= "nombre del archivo.html">Modificar Empresa</a> <a href="">Consultar Empresa</a></div>
+            </div>
+    </ul>
+
+        <!-- <nav class="nav1">
+            <ul>
+                <li>  <a href="/formulario/">Crear Usuario</a></li>  se usan para poner referencias de links con su nombre a presentar se puede usar solo la a
+                <li><a href= "nombre del archivo.html">Modificar Usuarios</a></li>
+                <li><a href="/cliente/">Consultar Usuario</a></li>
+                
+             </ul>
+        </nav> -->
+
+
+        <!-- <nav class="nav2">
+            <ul>
+                <li><a href="">Crear Empresa</a></li>
+                <li><a href= "nombre del archivo.html">Modificar Empresa</a></li>
+                <li><a href="">Consultar Empresa</a></li>
+                
+            </ul>
+        </nav>
+        <section>divide lo que contiene por sectores o secciones -->
    
             <fieldset>
                 <legend>los datos de la Empresa</legend> <!-- va el titulo del formulario o leyenda -->
@@ -45,6 +55,8 @@
                     <label for="">Documento</label>
                     <input type="number"><!-- obliga a solo ingresar numeros -->
                     <label for="">Nombre</label>
+                    <input type="text"><!-- ingresa numeros y letras -->
+                    <label for="">Apellidos</label>
                     <input type="text"><!-- ingresa numeros y letras -->
                     <label for="">Correo</label>
                     <input type="email"><!-- obliga a tener un @ -->
@@ -55,8 +67,8 @@
                     <input type="radio" name ="estado civil"><!-- pone casilla de seleccion, el mismo nombre pone a escoger solo uno -->
                     <label for="">Union Libre</label>
                     <input type="radio" name ="estado civil"><!-- pone casilla de seleccion, el mismo nombre pone a escoger solo uno -->
-                    <label for="">Divorciado</label>
-                    <input type="radio" name ="estado civil"><!-- pone casilla de seleccion, el mismo nombre pone a escoger solo uno -->
+                    <!-- <label for="">Divorciado</label>
+                    <input type="radio" name ="estado civil">pone casilla de seleccion, el mismo nombre pone a escoger solo uno -->
                     <input type="submit" value=" Enviar"><!-- el submit permite crear un boton para enviar -->
                 </from>
             </fieldset>

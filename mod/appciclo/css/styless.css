@@ -1,25 +1,53 @@
 .header{/*modifica la clase header del archivo html*/
     background-color: rgb(0, 162, 255);/*se asigna color a la clase*/
-    height: 50x;
+    height: 100x;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
-.logo{/*modifica en donde ira el logo*/
-    background-color: rgb(255, 255, 255);
-    width:30% ;
+.titulo{
+    background-color: rgb(241, 15, 15);
+    width:100%;
+    height: 100%px;
     display:inline-block;
-}
-.nav{/**/
-    background-color: rgb(0, 255, 255);
-    width:40%;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    margin-right: 9px;
+    font-size: 40px;
+    font-weight: bolder;
 }
 
+.logo{/*modifica en donde ira el logo*/
+    background-image: url('../imagenes/Logo.jpg');
+    background-color: rgb(255, 255, 255);
+    width:301px;
+    height: 172px;
+    display:inline-block;
+
+}
+
+container-buttons {
+    display: flex;
+}
+
+/*
+.nav1{
+    background-color: rgb(255, 0, 191);
+    width:100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+   
+}
+
+.nav2{/*
+    background-color: rgb(51, 255, 0);
+    width:100;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    */
+}
 ul{/**/
     background-color: rgb(0, 255, 255);
     width: 100%;/*pone el ancho al 100%*/
