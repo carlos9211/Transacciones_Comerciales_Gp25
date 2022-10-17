@@ -5,31 +5,34 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-sacale=1.0">
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/styless.css">
         <title>Document</title>
         <!-- {%if request.session.Email%}
         <span>{{request.session.Email}}</span> -->
     </head>
-    
+
 <body>
-    <header>
+    <header class="header">
         <div><!-- se utiliza para hacer diciciones no se recomienda usar muchas veces en el codigo por buenas practicas -->
             <h1>Bienvenido Administrador</h1><!-- se usa para los titulos va del 1 al 6 varia los tamaños -->
         </div>
         <div class="logo">Logo</div>
-        <nav>
-        
-            <li>  <a href="/formulario/">Registrar Usuario</a></li><!-- se usan para poner referencias de links con su nombre a presentar se puede usar solo la a -->
-            <li><a href="/cliente/">Consultar Usuario</a></li>
-            <li><a href= "nombre del archivo.html">Modificar Usuarios</a></li>
-        
+        <nav class="nav">
+            <ul>
+                <li>  <a href="/formulario/">Registrar Usuario</a></li><!-- se usan para poner referencias de links con su nombre a presentar se puede usar solo la a -->
+                <li><a href="/cliente/">Consultar Usuario</a></li>
+                <li><a href= "nombre del archivo.html">Modificar Usuarios</a></li>
+             </ul>
         </nav>
 
 
-        <nav>
-            <li><a href="">Registrar Empresa</a></li>
-            <li><a href="">Consultar Empresa</a></li>
-            <li><a href= "nombre del archivo.html">Modificar Empresa</a></li>
-        
+        <nav class="nav">
+            <ul>
+                <li><a href="">Registrar Empresa</a></li>
+                <li><a href="">Consultar Empresa</a></li>
+                <li><a href= "nombre del archivo.html">Modificar Empresa</a></li>
+            </ul>
         </nav>
 
     </header>
