@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% if request.session.nomusuario %}
+    <span>{{request.session.nomusuario}}</span>
+
+</head>
+<body>
+    <h1>Bienvenido Administrador</h1>
+    <a href="">Registrar Cliente</a>
+    <a href="">Consultar Cliente</a>
+    
+</body>
+{%endif%}
+</html>

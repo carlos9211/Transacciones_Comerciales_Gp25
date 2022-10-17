@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- {%load static%} -->
+        {%load static%}
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-sacale=1.0">
@@ -10,15 +10,15 @@
         <link rel="stylesheet" href="../css/stylessfromu.css">
         
         <title>Document</title>
-        <!-- {%if request.session.Email%}
-        <span>{{request.session.Email}}</span> -->
+        {%if request.session.Email%}
+        <span>{{request.session.Email}}</span>
     </head>
 
 <body class="cuerpo">
     <header class="header1">
         <div class="logo1"><h1 class="titulo1">REGISTR0 DE USUARIOS</h1></div>
         <div><!-- se utiliza para hacer diciciones no se recomienda usar muchas veces en el codigo por buenas practicas -->
-            </h1><!-- se usa para los titulos va del 1 al 6 varia los tamaños -->
+            <!-- se usa para los titulos va del 1 al 6 varia los tamaños -->
         </div>
         
 
@@ -54,7 +54,7 @@
         <section class="formulario" id="formu1"><!--divide lo que contiene por sectores o secciones -->
             <fieldset class="fieldset">
                 
-                <from action="" method="" class="form"><!-- se indica la url y el metodo que se usara post, get put, etc -->
+                <from action="/empleado/" method="POST" class="form"><!-- se indica la url y el metodo que se usara post, get put, etc -->
                     <legend>Ingrese los datos del usuario</legend> <!-- va el titulo del formulario o leyenda -->
 
                     <p>En el siguiente formulario debe ingresar los datos de los clientes que pertenen a las empresas y que podran realizar transacciones segun el perfil asiganado en el programa</p>
