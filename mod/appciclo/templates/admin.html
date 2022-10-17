@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- {%load static%} -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-sacale=1.0">
+        <title>Document</title>
+        <!-- {%if request.session.Email%}
+        <span>{{request.session.Email}}</span> -->
+    </head>
+    
+<body>
+    <header>
+        <div><!-- se utiliza para hacer diciciones no se recomienda usar muchas veces en el codigo por buenas practicas -->
+            <h1>Bienvenido Administrador</h1><!-- se usa para los titulos va del 1 al 6 varia los tamaños -->
+        </div>
+        <div class="logo">Logo</div>
+        <nav>
+        
+            <li>  <a href="/formulario/">Registrar Usuario</a></li><!-- se usan para poner referencias de links con su nombre a presentar se puede usar solo la a -->
+            <li><a href="/cliente/">Consultar Usuario</a></li>
+            <li><a href= "nombre del archivo.html">Modificar Usuarios</a></li>
+        
+        </nav>
+
+
+        <nav>
+            <li><a href="">Registrar Empresa</a></li>
+            <li><a href="">Consultar Empresa</a></li>
+            <li><a href= "nombre del archivo.html">Modificar Empresa</a></li>
+        
+        </nav>
+
+    </header>
+    <main>
+        <section><!-- divide lo que contiene por sectores o secciones -->
+   
+            <fieldset>
+                <legend>los datos de la Empresa</legend> <!-- va el titulo del formulario o leyenda -->
+                <from action="" method=""><!-- se indica la url y el metodo que se usara post, get put, etc -->
+                    <label for="">Documento</label>
+                    <input type="number"><!-- obliga a solo ingresar numeros -->
+                    <label for="">Nombre</label>
+                    <input type="text"><!-- ingresa numeros y letras -->
+                    <label for="">Correo</label>
+                    <input type="email"><!-- obliga a tener un @ -->
+                    <label for="">Estado Civil</label>
+                    <label for="">Soltero</label>
+                    <input type="radio" name ="estado civil"><!-- pone casilla de seleccion, el mismo nombre pone a escoger solo uno -->
+                    <label for="">Casado</label>
+                    <input type="radio" name ="estado civil"><!-- pone casilla de seleccion, el mismo nombre pone a escoger solo uno -->
+                    <label for="">Union Libre</label>
+                    <input type="radio" name ="estado civil"><!-- pone casilla de seleccion, el mismo nombre pone a escoger solo uno -->
+                    <label for="">Divorciado</label>
+                    <input type="radio" name ="estado civil"><!-- pone casilla de seleccion, el mismo nombre pone a escoger solo uno -->
+                    <input type="submit" value=" Enviar"><!-- el submit permite crear un boton para enviar -->
+                </from>
+            </fieldset>
+   
+        </section>
+        <section>
+            <table><!-- se usa para rear tablas -->
+                    <thead><!-- titulos o encabezados de las tablas -->
+                        <tr>
+                            <th>Nombre</th><!-- se usa para crear los datos de las celdas -->
+                            <th>Apellido</th>
+                            <th>Correo</th>
+                            <th>Direccion</th>
+                        </tr>
+                    </thead>
+
+
+                <tbody><!-- el cuerpo de la tabla -->
+                    <tr>
+                        <td>100</td><!-- se crean los datos de cada columna esto se hace por codigo de python -->
+                        <td>100</td>
+                        <td>100</td>
+                        <td>100</td>
+                    </tr><!-- tr se usa para crar las filas -->
+
+                </tbody>
+        
+
+        </table>
+
+    </section>
+{%endif%}
+ 
+</body>
+</main>
+<footer><!-- se usa para los pies de paginas -->
+
+</footer>
+        
+</html>
